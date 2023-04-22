@@ -15,11 +15,12 @@ def generate_output_html(name,dest):
 def hello_world():
     return render_template('index.html')
 
-@app.route('/process_form', methods=['POST'])
+@app.route('/', methods=['POST'])
 def process_form():
 
-    room = request.form['name']
-    dest = request.form['color']
+    room = request.form['start']
+    dest = request.form['dest']
+    #make dest access boelterMap.dest to look up destination by key number
     output_html = generate_output_html(room,dest)
     #if (room in boelterMap.rooms):
         #path = boelterMap.djikstra(room,dest)

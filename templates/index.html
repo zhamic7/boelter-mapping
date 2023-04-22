@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>escape</title>
+        <style>
+            *
+            {
+                font-family: 'Courier New', Courier, monospace;
+            }
+            h1
+            {
+                padding-top: 50px;
+                padding-bottom: 50px;
+                padding-left: 50px;
+                text-align: left;
+            }
+            .inputs{
+                padding-left: 50px;
+            }
+            .btn
+            {
+                             
+            }
+
+            @media screen and (max-width: 950px) 
+            {
+                .smallScreen{display:initial;}
+                .largeScreen{display:none;}
+            }
+            @media screen and (min-width: 951px) 
+            {
+                .smallScreen{display:none;}
+                .largeScreen{display:initial;}
+            }
+        </style>
+    </head>
+
+    <header>
+        <div class="smallScreen">
+            <h1 style="font-size:4vw">>> BOELTER: OPTIMIZED ESCAPE</h1>
+        </div>
+        <div class="largeScreen">
+            <h1>>> BOELTER: OPTIMIZED ESCAPE</h1>
+        </div>
+    </header>
+
+    <body>
+        <div class="inputs">
+            
+            <form method="POST" action=""{{ url_for('process_form') }}>
+                <label for="fname">Which room are you in?</label>
+                <input type="text" id="start" name="start">
+                <button class="btn" onclick="getStart()">submit</button>
+
+                <p>Where do you want to go?</p>
+                <select id="dest" name="dest">
+                    <option value="1" selected="selected">ackerman</option>
+                    <option value="2">math sci</option>
+                    <option value="3">jwc</option>
+                </select>
+            </form>
+        </div>  
+
+        <div class="output"> 
+            {{ output_html }} 
+        </div>
+    </body>
+
+    <!--
+            <script>
+        let dropdownList = document.getElementById('select_box');
+        dropdownList.onchange = (ev) =>{
+          let selecetedIndex = dropdownList.selectedIndex;
+          console.log("Selected index is: " + selecetedIndex);
+          let selectedOption = dropdownList.options[selecetedIndex];
+          console.log("Selected option is: " + selectedOption.outerHTML);
+          console.log("Selected value is: " + selectedOption.value);
+          console.log("Selected text is: " + selectedOption.text);
+        }
+    </script>
+    <script>
+        var startPt;
+        var endPt;
+        function getStart() {
+            startPt = document.getElementById("start").value;
+        }
+        function getEnd()
+        {
+            endPt = document.getElementbyId().value;
+        }
+    </script>
+    -->
+
+</html>
