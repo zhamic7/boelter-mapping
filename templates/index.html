@@ -110,6 +110,13 @@
 
             You are heading to: 
             <span id="printDest" style="font-weight:bold;"></span>
+
+            {% if display_visualization %}
+            <div class="frame">
+                {% include 'd3graph.html' %}
+            </div>
+            {% endif %}
+</iframe>
         </div>
     </body>
     <script>
@@ -129,4 +136,6 @@
         }
         document.getElementById("printDest").innerHTML = goTo;
     </script>
+
+
 </html>
