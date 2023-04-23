@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 import boelterMap 
 import visual
 import os
+import time
 app = Flask(__name__)
 
 display_visualization = False
@@ -27,7 +28,7 @@ def process_form():
     
     nodeStart = boelterMap.getRoom(room)
     nodeEnd = boelterMap.dest[dest]
-    
+    timestamp = int(time.time() * 1000)
     if (nodeStart is not None):
         print(os.listdir('templates'))
         visual.createVisual(nodeStart,nodeEnd) # create visualization
@@ -36,7 +37,7 @@ def process_form():
         output_html = generate_output_html(path)
     else:
         output_html = generate_output_html(None)
-    return render_template('index.html', output_html=output_html, room_html=room, dest_html=dest, display_visualization=display_visualization)
+    return render_template('index.html', output_html=output_html, room_html=room, dest_html=dest, display_visualization=display_visualization,timestamp=timestamp)
 
 @app.route('/', methods=['GET'])
 def show_index():
