@@ -9,6 +9,8 @@ boelterMap.add ....
 '''
 
 def generate_output_html(path):
+    if (path is None):
+        return "Invalid room #. Make sure you enter a real room in Boelter, which will always be a 4-digit number between 1200 and 8800. You can also enter SEASCAFE, CONNECTIONLAB, ROOF, or SEL."
     return str(path)
 
 @app.route('/')
@@ -23,15 +25,12 @@ def process_form():
     
     nodeStart = boelterMap.getRoom(room)
     nodeEnd = boelterMap.dest[dest]
-    print(nodeStart,nodeEnd)
-    path = boelterMap.djikstra(nodeStart,nodeEnd)
-
-    output_html = generate_output_html(path)
-    #if room is not None:
-        #path = boelterMap.djikstra(room,dest)
-        #printExit(path)
-    #else:
-        #ERROR: NOT A ROOM ROOM MUST BE A NUMBER
+    
+    if (nodeStart is not None):
+        path = boelterMap.djikstra(nodeStart,nodeEnd)
+        output_html = generate_output_html(path)
+    else:
+        output_html = generate_output_html(None)
     return render_template('index.html', output_html=output_html)
 
 @app.route('/', methods=['GET'])
