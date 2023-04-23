@@ -54,5 +54,5 @@ def createVisual(s,e):
 
 
     # Plot
-    d3.show(filepath='templates/', show_slider=False)
+    d3.show(filepath='templates/', show_slider=False, showfig = False, overwrite = True)
 

@@ -12,10 +12,15 @@ def generate_output_html(path):
 
 @app.route('/')
 def hello_world():
+    global display_visualization
+    display_visualization = False
     return render_template('index.html')
 
 @app.route('/', methods=['POST'])
 def process_form():
+    global display_visualization
+    display_visualization = False
+
     room = request.form['start']
     dest = request.form['dest']
     
