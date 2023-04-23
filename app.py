@@ -7,8 +7,9 @@ app = Flask(__name__)
 boelterMap = graph.Graph()
 boelterMap.add ....
 '''
-def generate_output_html(name,dest):
-    return 'Hello, ' + name + ' you like ' + dest + '.'
+
+def generate_output_html(path):
+    return str(path)
 
 @app.route('/')
 def hello_world():
@@ -18,15 +19,19 @@ def hello_world():
 def process_form():
     room = request.form['start']
     dest = request.form['dest']
-    #make dest access boelterMap.dest to look up destination by key number
-    output_html = generate_output_html(room,dest)
-    #if (room in boelterMap.rooms):
+    
+    nodeStart = boelterMap.getRoom(room)
+    nodeEnd = boelterMap.dest[dest]
+    print(nodeStart,nodeEnd)
+    path = boelterMap.djikstra(nodeStart,nodeEnd)
+
+    output_html = generate_output_html(path)
+    #if room is not None:
         #path = boelterMap.djikstra(room,dest)
         #printExit(path)
     #else:
         #ERROR: NOT A ROOM ROOM MUST BE A NUMBER
     return render_template('index.html', room_html=room, dest_html=dest)
-    return f"Hello {room} you like {dest}"
 
 @app.route('/', methods=['GET'])
 def show_index():

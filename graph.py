@@ -42,8 +42,13 @@ class Graph:
         while (unvisited):
             min_node = None
             min_node = heapq.heappop(heap)[1]
+
+            if (min_node[0] not in unvisited):
+                continue
+
             unvisited.remove(min_node[0])
             prev[min_node[0]] = min_node[1]
+            
 
             if (min_node[0] == v2):
                 return self.path(prev,v1,v2)
@@ -51,6 +56,7 @@ class Graph:
 
             for neighbor in self.V[min_node[0]]:
                 if (neighbor[0] in unvisited):
+                    #print(neighbor[0])
                     this_dist = dist[min_node[0]] + neighbor[1]
                     if (this_dist < dist[neighbor[0]]):
                         dist[neighbor[0]] = this_dist
