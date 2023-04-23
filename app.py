@@ -3,15 +3,10 @@ import boelterMap
 app = Flask(__name__)
 
 
-''' ADD THIS TO ANOTHER FILE AND IMPORT THAT?
-boelterMap = graph.Graph()
-boelterMap.add ....
-'''
-
 def generate_output_html(path):
     if (path is None):
         return "Invalid room #. Make sure you enter a real room in Boelter, which will always be a 4-digit number between 1200 and 8800. You can also enter SEASCAFE, CONNECTIONLAB, ROOF, or SEL."
-    return str(path)
+    return path
 
 @app.route('/')
 def hello_world():
@@ -19,7 +14,6 @@ def hello_world():
 
 @app.route('/', methods=['POST'])
 def process_form():
-
     room = request.form['start']
     dest = request.form['dest']
     
@@ -31,7 +25,7 @@ def process_form():
         output_html = generate_output_html(path)
     else:
         output_html = generate_output_html(None)
-    return render_template('index.html', output_html=output_html)
+    return render_template('index.html', output_html=output_html, room_html=room, dest_html=dest)
 
 @app.route('/', methods=['GET'])
 def show_index():
