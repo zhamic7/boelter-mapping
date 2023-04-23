@@ -101,8 +101,5 @@ def directions(start, end, path):
 
 def djikstra(s,e,S,E):
     path = directions(S,E,boelterG.djikstra(s,e))
-    print(directions(s,e,path))
     return path
-    # process path to give real directions 
-    #return printPath(path)
 
