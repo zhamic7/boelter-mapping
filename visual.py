@@ -79,5 +79,9 @@ def convertNodeName(node_name):
         return "Bomb_Shelter"
     elif node_name == "e4":
         return "Engineering_4"
+    elif node_name == "m":
+        return "MATHSCI"
+    elif node_name.startswith("m") and node_name[1:].isdigit():
+        return f"MATHSCI{node_name[1:]}"
     else:
         return node_name
