@@ -37,7 +37,7 @@
                 list-style-type: url();
             }
             .output {
-                background-color:white;
+                background-color:whitesmoke;
                 border-top: 20px solid rgba(135, 125, 160, 0.5);
                 border-bottom: 20px solid rgb(135, 125, 160, 0.5);
                 padding: 25px;
@@ -73,8 +73,6 @@
                 <br>
                 <br><span>Where do you want to go?</span>
                 <select id="dest" name="dest">
-<<<<<<< HEAD
-                    <option value=""></option>
                     <option value="1">ackerman</option>
                     <option value="2">bomb shelter</option>
                     <option value="3">court of sciences</option>
@@ -84,12 +82,6 @@
                     <option value="7">math sciences</option>
                     <option value="8">north campus</option>
                     <option value="9">powell library</option>
-=======
-                    
-                    <option value="1" selected="selected">ackerman</option>
-                    <option value="2">bomb shelter</option>
-                    <option value="3">court of sciences</option>
->>>>>>> b743e071bc74723d1fe7ae32cf7b82e4c287a864
                 </select>
                 <br>
                 <br><button class="btn" onclick="getStart()">submit</button>
@@ -100,9 +92,11 @@
         <div class="output">
             You are leaving: 
             <span style="font-weight:bold;">{{room_html}}</span>
+            
             <ul>
                     <li>{{output_html}}</li>
             </ul>
+
             You are heading to: 
             <span id="printDest" style="font-weight:bold;"></span>
         </div>
