@@ -12,6 +12,9 @@ def createVisual(s,e):
     target = []
     weight = []
 
+    s = convertNodeName(s)
+    e = convertNodeName(e)
+
     boelterG = graph.Graph()
     with open('nodes.txt','r') as f:
         line = f.readline()
@@ -19,7 +22,7 @@ def createVisual(s,e):
             line = line.rstrip()
             if (line and line[0] != '#'):
                 data = line.split(',')
-                boelterG.addEdge((data[0],data[1],int(data[2])))
+                boelterG.addEdge((convertNodeName(data[0]),convertNodeName(data[1]),int(data[2])))
             line = f.readline()
 
     a = boelterG.djikstra(s,e)
@@ -30,9 +33,9 @@ def createVisual(s,e):
             line = line.rstrip()
             data = line.split(',')
             if (line and line[0] != '#'):
-                if(data[0] in a):
-                    source.append(data[0])
-                    target.append(data[1])
+                if(convertNodeName(data[0]) in a):
+                    source.append(convertNodeName(data[0]))
+                    target.append(convertNodeName(data[1]))
                     if(int(data[2]) == 0):
                         weight.append(0.1)
                     else:
@@ -56,3 +59,29 @@ def createVisual(s,e):
     # Plot
     d3.show(filepath='templates/', show_slider=False, showfig = False, overwrite = True)
 
+def convertNodeName(node_name):
+    if node_name[:4].isdigit():
+        return "RM" + node_name[:4]
+    elif len(node_name) == 2 and node_name[1] in ['n', 'e', 's', 'w']:
+        floor_num = node_name[0]
+        direction = {'n': 'North', 'e': 'East', 's': 'South', 'w': 'West'}[node_name[1]]
+        return f"{floor_num}-{direction}_ELEV"
+    elif len(node_name) > 2 and node_name[1:3] in ['e-', 'w-'] and node_name[3:] in ['n', 'ne', 'nw', 's', 'se', 'sw']:
+        floor_num = node_name[0]
+        direction = node_name[3:].replace('ne', 'Northeast').replace('nw', 'Northwest').replace('se', 'Southeast').replace('sw', 'Southwest').title()
+        return f"{floor_num}-{direction}_ELEV"
+    elif node_name == "COS":
+        return "Court_of_Sciences"
+    elif node_name[:4] == "COS-":
+        direction = {'n': 'North', 'e': 'East', 's': 'South', 'w': 'West', 'm': 'Middle'}[node_name[-1]]
+        return f"{direction}_Court_of_Sciences"
+    elif node_name == "BOMB":
+        return "Bomb_Shelter"
+    elif node_name == "e4":
+        return "Engineering_4"
+    elif node_name == "m":
+        return "MATHSCI"
+    elif node_name.startswith("m") and node_name[1:].isdigit():
+        return f"MATHSCI{node_name[1:]}"
+    else:
+        return node_name
