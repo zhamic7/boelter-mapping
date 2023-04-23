@@ -3,7 +3,8 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>escape</title>
+        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='bulletpoint.png') }}">
+        <title>ESCAPE!</title>
         <style>
             *
             {
@@ -22,7 +23,7 @@
                 padding-left: 50px;
                 padding-right: 50px;
                 text-align: left;
-                background-color: rgb(135, 125, 160);
+                background-color: rgb(150, 145, 180);
                 color:white;
                 display: inline-block;
             }
@@ -33,13 +34,21 @@
             .btn{
                 background-color:palegoldenrod;
             }
-            .ul {
-                list-style-type: url();
+            ul{
+                padding: 25px;
+                margin: 0;
+                list-style-type: none;
+            }
+            li {
+                background: url("{{ url_for('static', filename='bulletpoint.png') }}") no-repeat left top;
+                height: 30px;
+                padding-top: 10px;
+                padding-left: 40px;
             }
             .output {
-                background-color:whitesmoke;
-                border-top: 20px solid rgba(135, 125, 160, 0.5);
-                border-bottom: 20px solid rgb(135, 125, 160, 0.5);
+                background-color:gainsboro;
+                border-top: 20px solid rgba(150, 145, 180, 0.75);
+                border-bottom: 20px solid rgb(150, 145, 180, 0.75);
                 padding: 25px;
                 height:100%;
             }
@@ -58,10 +67,10 @@
 
     <header class="banner">
         <div class="smallScreen">
-            <h1 style="font-size:4vw">boelter: optimized escape</h1>
+            <h1 style="font-size:4vw">BOELTER: OPTIMIZED ESCAPE</h1>
         </div>
         <div class="largeScreen">
-            <h1>boelter: optimized escape</h1>
+            <h1>BOELTER: OPTIMIZED ESCAPE</h1>
         </div>
     </header>
 
@@ -93,8 +102,10 @@
             You are leaving: 
             <span style="font-weight:bold;">{{room_html}}</span>
             
-            <ul>
-                    <li>{{output_html}}</li>
+            <ul id="path">
+                {% for loc in output_html %}
+                <li>{{ loc }}</li>
+                {%endfor%}
             </ul>
 
             You are heading to: 
@@ -103,19 +114,19 @@
     </body>
     <script>
         let goTo;
-        dest_data = '{{dest_html}}';
+        let dest_data = '{{dest_html}}';
         switch (dest_data) {
-            case "1": day = "ackerman"; break;
-            case "2": day = "bomb shelter"; break;
-            case "3": day = "court of sciences"; break;
-            case "4": day = "eng iv"; break;
-            case "5": day = "the hill"; break;
-            case "6": day = "medical plaza"; break;
-            case "7": day = "math sciences"; break;
-            case "8": day = "north campus"; break;
-            case "9": day = "powell library"; break;
+            case "1": goTo = "ackerman"; break;
+            case "2": goTo = "bomb shelter"; break;
+            case "3": goTo = "court of sciences"; break;
+            case "4": goTo = "eng iv"; break;
+            case "5": goTo = "the hill"; break;
+            case "6": goTo = "medical plaza"; break;
+            case "7": goTo = "math sciences"; break;
+            case "8": goTo = "north campus"; break;
+            case "9": goTo = "powell library"; break;
             default: goTo = "";
         }
-        document.getElementById("printDest").innerHTML = day;
+        document.getElementById("printDest").innerHTML = goTo;
     </script>
 </html>
