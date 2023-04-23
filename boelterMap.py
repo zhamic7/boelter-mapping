@@ -1,4 +1,5 @@
 import graph
+import re
 
 boelterG = graph.Graph()
 with open('nodes.txt','r') as f:
@@ -23,7 +24,7 @@ def getRoom(r):
             if (r[0] != '2'):
                 return (r[0] + 's')
             else:
-                return ('2e-sw')
+                return ('27x')
         elif (r[1] == '8' or r[1] == '6'):
             return (r[0] + 'w')
         else:
@@ -52,13 +53,55 @@ dest = {
     "8":"NORTH",
     "9":"POWELL"
 }
-
-def directions(path):
+dest2 = {
+    "1":"Ackerman",
+    "2":"Bomb shelter",
+    "3":"Court of Sciences",
+    "4":"Engineering IV",
+    "5":"The Hill",
+    "6":"Medical Plaza",
+    "7":"Math Sci",
+    "8":"North Campus",
+    "9":"Powell Library"
+}
+def directions(start, end, path):
     directions = []
+    i = 1
+    incos = False
+    while (i < len(path) - 1):
+        pattern = '^[0-9]e-'
+        rmatch = re.search(pattern,path[i])
+        estart = None
+        eend = None
+        if (rmatch):
+            estart = path[i][0]
+        while (i < len(path)-1 and rmatch):
+            eend = path[i][0]
+            print(i)
+            i+=1
+            rmatch = re.search(pattern,path[i])
+        if (eend == estart):
+            estart = None
 
+        if (estart is not None):
+            directions.append(f"Take elevator from floor {int(estart)} to {int(eend)}")
+            i-=1
+        elif ("COS" in path[i]):
+            if (incos):
+                pass
+            else:
+                directions.append("Exit to the Court of Sciences")
+                incos = True
+        elif (len(path[i]) == 2):
+            pass
+        else:
+            directions.append(path[i])
+        i+=1
+    return directions
 
-def djikstra(s,e):
-    path = boelterG.djikstra(s,e)
+def djikstra(s,e,S,E):
+    path = directions(S,E,boelterG.djikstra(s,e))
+    print(directions(s,e,path))
     return path
     # process path to give real directions 
     #return printPath(path)
