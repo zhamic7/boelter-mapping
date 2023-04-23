@@ -132,6 +132,4 @@ def directions(start, end, path):
 
 def djikstra(s,e,S,E):
     path = directions(S,E,boelterG.djikstra(s,e))
-    #print(boelterG.djikstra(s,e))
     return path
-

@@ -1,7 +1,9 @@
 from flask import Flask, render_template, request
-import boelterMap 
+import boelterMap
+import visual
 app = Flask(__name__)
 
+display_visualization = False
 
 def generate_output_html(path):
     if (path is None):
@@ -14,6 +16,7 @@ def hello_world():
 
 @app.route('/', methods=['POST'])
 def process_form():
+    global display_visualization 
     room = request.form['start']
     dest = request.form['dest']
     
@@ -21,11 +24,13 @@ def process_form():
     nodeEnd = boelterMap.dest[dest]
     
     if (nodeStart is not None):
+        display_visualization = True
+        visual.createVisual(nodeStart,nodeEnd) # create visualization
         path = boelterMap.djikstra(nodeStart,nodeEnd,room,boelterMap.dest2[dest])
         output_html = generate_output_html(path)
     else:
         output_html = generate_output_html(None)
-    return render_template('index.html', output_html=output_html, room_html=room, dest_html=dest)
+    return render_template('index.html', output_html=output_html, room_html=room, dest_html=dest,display_visualization=display_visualization)
 
 @app.route('/', methods=['GET'])
 def show_index():
