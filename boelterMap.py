@@ -1,6 +1,14 @@
 import graph
 import re
 
+directionDict = {
+        'n':'north',
+        's':'south',
+        'e':'east',
+        'w':'west'
+        }
+
+
 boelterG = graph.Graph()
 with open('nodes.txt','r') as f:
     line = f.readline()
@@ -77,12 +85,12 @@ def directions(start, end, path):
             estart = path[i][0]
         while (i < len(path)-1 and rmatch):
             eend = path[i][0]
-            print(i)
             i+=1
             rmatch = re.search(pattern,path[i])
         if (eend == estart):
             estart = None
-
+            if (eend is not None):
+                i-=1
         if (estart is not None):
             directions.append(f"Take elevator from floor {int(estart)} to {int(eend)}")
             i-=1
@@ -92,7 +100,30 @@ def directions(start, end, path):
             else:
                 directions.append("Exit to the Court of Sciences")
                 incos = True
+        elif (path[i] == "ACKERMAN"):
+            directions.append("Head to Ackerman")
+        elif (path[i] == "POWELL"):
+            directions.append("Head to Powell library")
+        elif (path[i] == "EXIT-3"):
+            directions.append("Exit onto the catwalk outside of floor 3, on the west side. Walk north towards Ackerman")
+        elif (path[i] == "BOMB"):
+            directions.append("Head to the bomb shelter")
+        elif (len(path[i-1]) == 2 and path[i-1][0] != 'm'):
+            if re.search(pattern,path[i]):
+                if path[i-1][-1] == path[i][-1]:
+                    directions.append(f"Walk {directionDict[path[i][-2]]}")
+                elif path[i-1][-1] == path[i][-2]:
+                    directions.append(f"Walk {directionDict[path[i][-1]]}")
+                else:
+                    pass
         elif (len(path[i]) == 2):
+            if (path[i][0] == 'm'):
+                directions.append(f"Go to mathsci floor {path[i][1]}")
+            else:
+                pass
+        elif (re.search(pattern,path[i])):
+            pass
+        elif (path[i] == '8500'):
             pass
         else:
             directions.append(path[i])
@@ -101,8 +132,6 @@ def directions(start, end, path):
 
 def djikstra(s,e,S,E):
     path = directions(S,E,boelterG.djikstra(s,e))
-    print(directions(s,e,path))
+    #print(boelterG.djikstra(s,e))
     return path
-    # process path to give real directions 
-    #return printPath(path)
 

@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 def generate_output_html(path):
     if (path is None):
-        return "Invalid room #. Make sure you enter a real room in Boelter, which will always be a 4-digit number between 1200 and 8800. You can also enter SEASCAFE, CONNECTIONLAB, ROOF, or SEL."
+        return ["Invalid room #. Make sure you enter a real room in Boelter, which will always be a 4-digit number between 1200 and 8800. You can also enter SEASCAFE, CONNECTIONLAB, ROOF, or SEL."]
     return path
 
 @app.route('/')

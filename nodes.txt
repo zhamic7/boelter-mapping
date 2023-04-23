@@ -1,9 +1,9 @@
 # 8th floor
 
-8e-nw,7e-nw,0
-8e-sw,7e-sw,0
-8e-ne,7e-ne,0
-8e-se,7e-se,0
+8e-nw,7e-nw,1
+8e-sw,7e-sw,1
+8e-ne,7e-ne,1
+8e-se,7e-se,1
 
 8e-nw,8500,100
 8e-sw,ROOF,100
@@ -19,10 +19,10 @@ ROOF,8500,50
 
 # 7th floor
 
-7e-nw,6e-nw,0
-7e-sw,6e-sw,0
-7e-ne,6e-ne,0
-7e-se,6e-se,0
+7e-nw,6e-nw,1
+7e-sw,6e-sw,1
+7e-ne,6e-ne,1
+7e-se,6e-se,1
 
 7e-nw,7n,150
 7e-ne,7n,150
@@ -39,10 +39,10 @@ ROOF,8500,50
 
 # 6th floor
 
-6e-nw,5e-nw,0
-6e-sw,5e-sw,0
-6e-ne,5e-ne,0
-6e-se,5e-se,0
+6e-nw,5e-nw,1
+6e-sw,5e-sw,1
+6e-ne,5e-ne,1
+6e-se,5e-se,1
 
 6e-nw,6n,150
 6e-ne,6n,150
@@ -59,10 +59,10 @@ ROOF,8500,50
 
 # 5th floor
 
-5e-nw,4e-nw,0
-5e-sw,4e-sw,0
-5e-ne,4e-ne,0
-5e-se,4e-se,0
+5e-nw,4e-nw,1
+5e-sw,4e-sw,1
+5e-ne,4e-ne,1
+5e-se,4e-se,1
 
 5e-nw,5n,150
 5e-ne,5n,150
@@ -85,10 +85,10 @@ ROOF,8500,50
 
 # 4th floor
 
-4e-nw,3e-nw,0
-4e-sw,3e-sw,0
-4e-ne,3e-ne,0
-4e-se,3e-se,0
+4e-nw,3e-nw,1
+4e-sw,3e-sw,1
+4e-ne,3e-ne,1
+4e-se,3e-se,1
 
 4e-nw,4n,150
 4e-ne,4n,150
@@ -104,10 +104,10 @@ ROOF,8500,50
 
 # 3rd floor
 
-3e-nw,2e-nw,0
-3e-sw,2e-sw,0
-3e-ne,2e-ne,0
-3e-se,2e-se,0
+3e-nw,2e-nw,1
+3e-sw,2e-sw,1
+3e-ne,2e-ne,1
+3e-se,2e-se,1
 
 3e-nw,3n,150
 3e-ne,3n,150
@@ -127,10 +127,13 @@ ROOF,8500,50
 GARDEN,m4,20
 GARDEN,m3,50
 
+3e-nw,EXIT-3,0
+EXIT-3,ACKERMAN,700
+
 # 2nd floor
 
-2e-nw,1e-nw,0
-2e-sw,1e-sw,0
+2e-nw,1e-nw,1
+2e-sw,1e-sw,1
 
 2e-nw,2n,150
 2e-ne,2n,150
@@ -162,15 +165,15 @@ EXIT1-s,1w,100
 m5,ACKERMAN,1000
 m5,POWELL,1000
 POWELL,NORTH,1000
-HILL,EXIT1-n,3025
+HILL,EXIT1-n,3000
 HILL,ACKERMAN,2000
-COS,COS-n,0
-COS,COS-m,0
-COS,COS-s,0
+COS,COS-n,100
+COS,COS-m,100
+COS,COS-s,100
 BOMB,COS-s,50
 BOMB,COS-m,150
 BOMB,COS-n,250
-COS-n,ACKERMAN,900
+COS-n,ACKERMAN,999
 BOMB,MEDICAL,1000
 
 # math sci
