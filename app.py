@@ -27,7 +27,7 @@ def process_form():
     nodeEnd = boelterMap.dest[dest]
     
     if (nodeStart is not None):
-        path = boelterMap.djikstra(nodeStart,nodeEnd)
+        path = boelterMap.djikstra(nodeStart,nodeEnd,room,boelterMap.dest2[dest])
         output_html = generate_output_html(path)
     else:
         output_html = generate_output_html(None)
