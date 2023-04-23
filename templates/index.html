@@ -9,19 +9,26 @@
             {
                 font-family: 'Courier New', Courier, monospace;
             }
+            .banner {
+                padding-top:9vw;
+                padding-bottom:3vw;
+                background-image: url("{{ url_for('static', filename='banner.jpg') }}");
+                background-size:100%;
+            }
             h1
             {
-                padding-top: 50px;
-                padding-bottom: 50px;
+                padding-top: 5px;
+                padding-bottom: 5px;
                 padding-left: 50px;
                 text-align: left;
+                background-color: rgba(255, 255, 255,0.6);
             }
             .inputs{
+                padding-top: 25px;
                 padding-left: 50px;
             }
-            .btn
-            {
-                             
+            .btn{
+                background-color:palegoldenrod;
             }
 
             @media screen and (max-width: 950px) 
@@ -37,7 +44,7 @@
         </style>
     </head>
 
-    <header>
+    <header class="banner">
         <div class="smallScreen">
             <h1 style="font-size:4vw">>> BOELTER: OPTIMIZED ESCAPE</h1>
         </div>
@@ -48,49 +55,25 @@
 
     <body>
         <div class="inputs">
-            
             <form method="POST" action=""{{ url_for('process_form') }}>
                 <label for="fname">Which room are you in?</label>
                 <input type="text" id="start" name="start">
-                <button class="btn" onclick="getStart()">submit</button>
-
-                <p>Where do you want to go?</p>
+                <br>
+                <br><p style="display:inline">Where do you want to go?</p>
                 <select id="dest" name="dest">
+                    
                     <option value="1" selected="selected">ackerman</option>
                     <option value="2">math sci</option>
                     <option value="3">jwc</option>
                 </select>
+                <br>
+                <br><button class="btn" onclick="getStart()">submit</button>
             </form>
         </div>  
 
+        <br>
         <div class="output"> 
             {{ output_html }} 
         </div>
     </body>
-
-    <!--
-            <script>
-        let dropdownList = document.getElementById('select_box');
-        dropdownList.onchange = (ev) =>{
-          let selecetedIndex = dropdownList.selectedIndex;
-          console.log("Selected index is: " + selecetedIndex);
-          let selectedOption = dropdownList.options[selecetedIndex];
-          console.log("Selected option is: " + selectedOption.outerHTML);
-          console.log("Selected value is: " + selectedOption.value);
-          console.log("Selected text is: " + selectedOption.text);
-        }
-    </script>
-    <script>
-        var startPt;
-        var endPt;
-        function getStart() {
-            startPt = document.getElementById("start").value;
-        }
-        function getEnd()
-        {
-            endPt = document.getElementbyId().value;
-        }
-    </script>
-    -->
-
 </html>
