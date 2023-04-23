@@ -112,11 +112,8 @@
             <span id="printDest" style="font-weight:bold;"></span>
 
             {% if display_visualization %}
-            <div class="frame">
-                {% include 'd3graph.html' %}
-            </div>
+	    <iframe src="/templates/d3graph.html" style="width: 100%; height: 50vh;"> </iframe>
             {% endif %}
-</iframe>
         </div>
     </body>
     <script>
@@ -134,7 +131,7 @@
             case "9": goTo = "powell library"; break;
             default: goTo = "";
         }
-        document.getElementById("printDest").innerHTML = goTo;
+        document.getElementById("printDest").textContent = goTo;
     </script>
 
 

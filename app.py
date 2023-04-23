@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 import boelterMap 
 import visual
+import os
 app = Flask(__name__)
 
 display_visualization = False
@@ -28,6 +29,7 @@ def process_form():
     nodeEnd = boelterMap.dest[dest]
     
     if (nodeStart is not None):
+        print(os.listdir('templates'))
         visual.createVisual(nodeStart,nodeEnd) # create visualization
         display_visualization = True
         path = boelterMap.djikstra(nodeStart,nodeEnd,room,boelterMap.dest2[dest])
@@ -40,6 +42,9 @@ def process_form():
 def show_index():
     return render_template('index.html')
 
+@app.get('/templates/d3graph.html')
+def show_graph():
+    return render_template('d3graph.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
