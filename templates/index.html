@@ -3,7 +3,8 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>escape</title>
+        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='bulletpoint.png') }}">
+        <title>ESCAPE!</title>
         <style>
             *
             {
@@ -17,11 +18,14 @@
             }
             h1
             {
-                padding-top: 5px;
-                padding-bottom: 5px;
+                padding-top: 10px;
+                padding-bottom: 10px;
                 padding-left: 50px;
+                padding-right: 50px;
                 text-align: left;
-                background-color: rgba(255, 255, 255,0.6);
+                background-color: rgb(150, 145, 180);
+                color:white;
+                display: inline-block;
             }
             .inputs{
                 padding-top: 25px;
@@ -30,7 +34,24 @@
             .btn{
                 background-color:palegoldenrod;
             }
-
+            ul{
+                padding: 25px;
+                margin: 0;
+                list-style-type: none;
+            }
+            li {
+                background: url("{{ url_for('static', filename='bulletpoint.png') }}") no-repeat left top;
+                height: 30px;
+                padding-top: 10px;
+                padding-left: 40px;
+            }
+            .output {
+                background-color:gainsboro;
+                border-top: 20px solid rgba(150, 145, 180, 0.75);
+                border-bottom: 20px solid rgb(150, 145, 180, 0.75);
+                padding: 25px;
+                height:100%;
+            }
             @media screen and (max-width: 950px) 
             {
                 .smallScreen{display:initial;}
@@ -46,10 +67,10 @@
 
     <header class="banner">
         <div class="smallScreen">
-            <h1 style="font-size:4vw">>> BOELTER: OPTIMIZED ESCAPE</h1>
+            <h1 style="font-size:4vw">BOELTER: OPTIMIZED ESCAPE</h1>
         </div>
         <div class="largeScreen">
-            <h1>>> BOELTER: OPTIMIZED ESCAPE</h1>
+            <h1>BOELTER: OPTIMIZED ESCAPE</h1>
         </div>
     </header>
 
@@ -59,12 +80,17 @@
                 <label for="fname">Which room are you in?</label>
                 <input type="text" id="start" name="start">
                 <br>
-                <br><p style="display:inline">Where do you want to go?</p>
+                <br><span>Where do you want to go?</span>
                 <select id="dest" name="dest">
-                    
-                    <option value="1" selected="selected">ackerman</option>
+                    <option value="1">ackerman</option>
                     <option value="2">bomb shelter</option>
                     <option value="3">court of sciences</option>
+                    <option value="4">eng iv</option>
+                    <option value="5">the hill</option>
+                    <option value="6">medical plaza</option>
+                    <option value="7">math sciences</option>
+                    <option value="8">north campus</option>
+                    <option value="9">powell library</option>
                 </select>
                 <br>
                 <br><button class="btn" onclick="getStart()">submit</button>
@@ -72,8 +98,35 @@
         </div>  
 
         <br>
-        <div class="output"> 
-            {{ output_html }} 
+        <div class="output">
+            You are leaving: 
+            <span style="font-weight:bold;">{{room_html}}</span>
+            
+            <ul id="path">
+                {% for loc in output_html %}
+                <li>{{ loc }}</li>
+                {%endfor%}
+            </ul>
+
+            You are heading to: 
+            <span id="printDest" style="font-weight:bold;"></span>
         </div>
     </body>
+    <script>
+        let goTo;
+        let dest_data = '{{dest_html}}';
+        switch (dest_data) {
+            case "1": goTo = "ackerman"; break;
+            case "2": goTo = "bomb shelter"; break;
+            case "3": goTo = "court of sciences"; break;
+            case "4": goTo = "eng iv"; break;
+            case "5": goTo = "the hill"; break;
+            case "6": goTo = "medical plaza"; break;
+            case "7": goTo = "math sciences"; break;
+            case "8": goTo = "north campus"; break;
+            case "9": goTo = "powell library"; break;
+            default: goTo = "";
+        }
+        document.getElementById("printDest").innerHTML = goTo;
+    </script>
 </html>

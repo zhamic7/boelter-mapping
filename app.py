@@ -19,7 +19,6 @@ def hello_world():
 
 @app.route('/', methods=['POST'])
 def process_form():
-
     room = request.form['start']
     dest = request.form['dest']
     
@@ -31,7 +30,7 @@ def process_form():
         output_html = generate_output_html(path)
     else:
         output_html = generate_output_html(None)
-    return render_template('index.html', output_html=output_html)
+    return render_template('index.html', output_html=output_html, room_html=room, dest_html=dest)
 
 @app.route('/', methods=['GET'])
 def show_index():
